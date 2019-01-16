@@ -38,6 +38,6 @@ There are 3 Python scrips that have be witten or changed, Also, these scrips out
 
 3. Go to http://0.0.0.0:3001/  
    
-### Licensing, Authors, and Aknowledgements
+### 5.Licensing, Authors, and Aknowledgements
 Must give credit to [Fieure Eight](https://www.figure-eight.com/) for the data.You can find the Licensing for the data and other descriptiv information at Figure Eight in available [here](https://www.figure-eight.com/legal/). Also Must give credit to Udacity for the code and the project template. Otherwise, feel free to use the code here as you would like. This project was committed to the GitHub [here](https://github.com/caoconghan/DataScientist_DiasterResponsePipeline.git), everyone can download or use as you would like.
 
