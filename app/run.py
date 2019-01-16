@@ -15,6 +15,14 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 def tokenize(text):
+    """tokenize, lemmatize and clean the data
+
+    Keyword arguments:
+    test -- string, test to be tokenize
+   
+    Return :
+    clean_tokens -- list,clean tokens
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -25,7 +33,7 @@ def tokenize(text):
 
     return clean_tokens
 
-# load data
+# load data from SQLite database
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse', engine)
 
@@ -37,7 +45,13 @@ model = joblib.load("../models/classifier.pkl")
 @app.route('/')
 @app.route('/index')
 def index():
-    
+    """add data for visuals
+
+    Keyword arguments: None    
+   
+    Return :
+    render_template--render web page with plotly graphs
+    """
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
@@ -58,21 +72,20 @@ def index():
     categoty_describe_values = category_row_df.describe().values[1:]
     describe_names = []
     describe_values = []
+    #add describe names
     describe_names.append(categoty_describe_names[0])
     describe_names.append(categoty_describe_names[1])
     describe_names.append(categoty_describe_names[2])
     describe_names.append(categoty_describe_names[6])
     
+    #add describe values
     describe_values.append(categoty_describe_values[0])
     describe_values.append(categoty_describe_values[1])
     describe_values.append(categoty_describe_values[2])
     describe_values.append(categoty_describe_values[6])
     
-    print(categoty_describe_names)
-    print(categoty_describe_values)
-    print(describe_names)
-    print(describe_values)
     
+    #add 3 graphs to master.html uing dict
     graphs = [
         {
             'data': [
@@ -143,6 +156,13 @@ def index():
 # web page that handles user query and displays model results
 @app.route('/go')
 def go():
+    """use model to predict classification for query by the go.html
+
+    Keyword arguments: None    
+   
+    Return :
+    render_template--render the go.html
+    """
     # save user input in query
     query = request.args.get('query', '') 
 
